@@ -146,14 +146,9 @@ void drawBullet(int bulY, int bulX){
 void drawBug(windowData *game) {
     for(int bug_num = 0; bug_num < 10; bug_num++) {
         if(game->bugs[bug_num].status == 1) {
-            mvprintw(game->bugs[bug_num].bugX, game->bugs[bug_num].bugX, shipHead)    ;
+            mvprintw(game->bugs[bug_num].bugx, game->bugs[bug_num].bugy, bugHead);
         }
     }
-
-
-
-
-
 /* FOR PRINTING
     for bug_number < 10
         if bugs[bug_number].status == 1
@@ -198,6 +193,7 @@ void fireBullet(windowData *game){
     int err;
     int bulX = game->shipX;
     int bulY = game->shipY - 3;
+    int 
     while(true) {
         pthread_mutex_lock(&gameLock);
         drawBullet(bulY, bulX);
@@ -210,13 +206,6 @@ void fireBullet(windowData *game){
         pthread_mutex_lock(&gameLock);
         erase();
         pthread_mutex_unlock(&gameLock);
-
-        // game -> bulY -= 2;
-        //
-        // if(game ->bulY == game -> _y)
-        //  break;
-        // if (game -> bulY <= -3)
-        //     break;
 
         bulY -= 1;
 
@@ -233,7 +222,7 @@ void swarmThread(windowData *game) {
 
     while(true) {
         pthread_mutex_lock(&gameLock);
-        //drawBug(game);
+        drawBug(game);
         //moveBug(game);
         //killBug(game);
         refresh();
