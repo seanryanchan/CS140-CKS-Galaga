@@ -8,15 +8,19 @@
 // #include "mp_bullet.c"
 // #include "mp_ship.c"
 // #include "helpers.h"
-// PEW PEW PEW PEW PEW PEW pew pew pew pew pewpew pew epw;e pwe pwe pw epwe PEW
+
 /*
 atom://teletype/portal/41eac518-2e39-4494-985b-3b92f82d20a9
 */
-// sean -> fix flicker
+// sean -> fix
+
 
 #define MAX_THREADS 2048
 #define SHIPRATE 50000
 #define BULLETRATE 75000
+#define REFRESH_RATE
+#define BUG_ROW
+#define BUG_COL
 
 pthread_mutex_t gameLock;
 pthread_mutex_t ex;
@@ -136,6 +140,19 @@ void drawBullet(int bulY, int bulX){
 	mvprintw(bulY, bulX, bulletHead);
 	mvprintw(bulY + 1, bulX, bulletBody);
 	mvprintw(bulY + 2, bulX, bulletTail);
+}
+
+void drawBug(currentY, currentX) {
+	int y = currentY;
+	int x = currentX;
+
+	for (int i = 0; i < SWARM_ROWS; i++) {
+		for (int j = 0; j < SWARM_COLS; j++) {
+			if (swarm[i][j])
+				mvprintw(topleft_y+i, topleft_x+j, SWARM_CHAR);
+		}
+		printf("\n");
+	}
 }
 
 void shipSpawn(winData *game){
