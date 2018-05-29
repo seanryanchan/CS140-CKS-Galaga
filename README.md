@@ -2,7 +2,7 @@ This is the readme for the 140 ME
 
 Game Specs:
 
-The game is called: GALAGA
+The game is called: GALAGA iPens
 
 The goal of the game is to destroy the enemy bug
 
@@ -24,3 +24,15 @@ Running the Game:
     chmod +x runMP.sh
 3. to open the game type
     ./runMP.sh
+
+
+
+
+Tasks natin:
+    1) text files with names
+    2) readme:
+        -how to run program
+        -third party library
+        -program limitations
+        -environment specs and restrictions
+    3) c code

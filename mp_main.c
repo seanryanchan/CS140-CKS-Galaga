@@ -57,6 +57,10 @@ char *bulletTail = "O O";
 // P.S. this is my actual size x100
 
 
+// bugHead
+char *bugHead = "O~";
+//
+
 int main(int argc, char const *argv[]) {
     // setlocale(LC_ALL, **);
     initscr();
@@ -81,18 +85,16 @@ int main(int argc, char const *argv[]) {
     game.shipX = game.maxX / 2;
     game.shipY = game.maxY / 2;
 
-/*
-swarmdeclaration
-
-for i < 10
-game.bugs[i].bugsx = i
-game.bugs[i].bu
-
-*/
-
+    // initial swarm coordinate declaration
+    for(int i = 0; i < 10; i++) {
+        game.bugs[i].bugx = i;
+        game.bugs[i].bugy = 0;
+        game.bugs[i].status = 1; //all alive
+    }
 
     pthread_create(&(game.threads[0]), NULL, (void *)shipSpawn, (void *)&game);
     // Ship is spawned and controlled by thread 0.
+
     int ch;
     while(true) {
         ch = getch();
@@ -100,7 +102,7 @@ game.bugs[i].bu
             game.bulX = game.shipX;
             game.bulY = game.shipY-3;
             pthread_create(&(game.threads[game.bulletThread]), NULL, (void *)fireBullet, (void *)&game);
-            if (game.bulletThread == MAX_THREADS -1)
+            if (game.bulletThread == (MAX_THREADS - 1))
                 game.bulletThread = 10;
             else
                 game.bulletThread += 1;
@@ -141,8 +143,18 @@ void drawBullet(int bulY, int bulX){
     mvprintw(bulY + 2, bulX, bulletTail);
 }
 
-void drawBug(int currentY, int currentX) {
-    /* FOR PRINTING
+void drawBug(windowData *game) {
+    for(int bug_num = 0; bug_num < 10; bug_num++) {
+        if(game->bugs[bug_num].status == 1) {
+            mvprintw(game->bugs[bug_num].bugX, game->bugs[bug_num].bugX, shipHead)    ;
+        }
+    }
+
+
+
+
+
+/* FOR PRINTING
     for bug_number < 10
         if bugs[bug_number].status == 1
             print (character "*", bugs[bug_number].bugx , bugs[bug_number].bugy)
@@ -206,7 +218,7 @@ void fireBullet(windowData *game){
         // if (game -> bulY <= -3)
         //     break;
 
-        bulY -= 2;
+        bulY -= 1;
 
         if (bulY <= -3)
                 break;
